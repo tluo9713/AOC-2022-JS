@@ -14,7 +14,7 @@ const TOO_EARLY_REQUEST_TEXT =
 const UNAUTHENTICATED_INPUT_TEXT = "please log in to get your puzzle input";
 const INTERNAL_SERVER_ERROR_TEXT = "internal server error";
 const HTML_RESPONSE_TEXT = "!DOCTYPE HTML";
-const fetchFromCacheOrAoC = async (uri, options) => {
+const fetchFromAoC = async (uri, options) => {
     const response = await fetch(uri, options);
     return response.text();
 };
@@ -27,11 +27,10 @@ let getInput = async (config) => {
         headers: {
             "Content-Type": "text/plain",
             Cookie: `session=${token}`,
-            // "User-Agent": USER_AGENT,
         },
     };
 
-    const textResponse = await fetchFromCacheOrAoC(uri, options);
+    const textResponse = await fetchFromAoC(uri, options);
 
     if (textResponse.toLowerCase().includes(UNAUTHENTICATED_INPUT_TEXT)) {
         return Promise.reject(
@@ -74,7 +73,7 @@ let getInput = async (config) => {
 // THE CORRESPONDING DAY FOLDER IN AN INPUT TEXT FILE
 // =================== LITERALLY RUN THIS AND THEN CLOSE THE FILE ==========================
 const year = 2022;
-const day = 2;
+const day = 1;
 const config = { year, day, token };
 // ABOVE HERE
 
