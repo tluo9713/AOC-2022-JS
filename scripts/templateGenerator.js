@@ -24,16 +24,16 @@ const sampleInput = \`\`;
 let input = newLineSplitter(sampleInput);
 // let input = newLineSplitter(rawInput);
 
-// for (let i = 0; i < input.length; i++) {
-
-// }
-
-// input = input.map((el, idx)=> {
-
-// })
 
 let part1 = (input) => {
-    return input;
+    let res = 0;
+    for (let i = 0; i < input.length; i++) {
+        let el = input[i];
+    }
+    for (let i = 0; i < PLACEHOLDER; i++) {
+        
+    }
+    return res;
 };
 
 let part1Solution = part1(input);
@@ -47,7 +47,7 @@ let part2Solution = part2(input);
 // console.log(part2Solution);
 `;
 
-const day = 3;
+const day = 2;
 
 try {
     // generate directory
