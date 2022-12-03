@@ -27,7 +27,7 @@ let input = newLineSplitter(sampleInput);
 
 let part1 = (input) => {
     let res = 0;
-    for (let i = 0; i < input.length; i++) {
+    for (let i = 0; i < input.length - 1; i++) {
         let el = input[i];
     }
     for (let i = 0; i < PLACEHOLDER; i++) {
@@ -47,7 +47,7 @@ let part2Solution = part2(input);
 // console.log(part2Solution);
 `;
 
-const day = 2;
+const day = 3;
 
 try {
     // generate directory
