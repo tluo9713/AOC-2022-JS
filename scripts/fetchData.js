@@ -73,7 +73,7 @@ let getInput = async (config) => {
 // THE CORRESPONDING DAY FOLDER IN AN INPUT TEXT FILE
 // =================== LITERALLY RUN THIS AND THEN CLOSE THE FILE ==========================
 const year = 2022;
-const day = 3;
+const day = 4;
 const config = { year, day, token };
 // ABOVE HERE
 

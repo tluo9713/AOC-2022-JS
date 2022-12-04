@@ -105,6 +105,12 @@ const getPriority = (char) => {
     return char.charCodeAt(0) - 64 + 26;
 };
 
+const getRuckSacks = (input, start, end) => {
+    const rucksacks = [];
+    for (let i = start; i < end; i++) rucksacks.push(input[i]);
+    return rucksacks;
+};
+
 const part1Clean = (input) => {
     let res = 0;
 
@@ -122,13 +128,11 @@ const part1Clean = (input) => {
 
 const part2Clean = (input) => {
     let res = 0;
+    const rucksackCount = 3;
+    for (let i = 0; i < input.length - 1; i += rucksackCount) {
+        const rucksacks = getRuckSacks(input, i, i + rucksackCount);
 
-    for (let i = 0; i < input.length - 1; i += 3) {
-        const rucksack1 = input[i];
-        const rucksack2 = input[i + 1];
-        const rucksack3 = input[i + 2];
-
-        const commonChar = getCommonItem(rucksack1, rucksack2, rucksack3);
+        const commonChar = getCommonItem(...rucksacks);
         res += getPriority(commonChar);
     }
     return res;
