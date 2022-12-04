@@ -56,7 +56,8 @@ console.log(part1Solution);
 let part2Solution = part2(input);
 console.log(part2Solution);
 
-// to be honest i think the code i wrote is not too bad already, below is a bit more readable
+// to be honest i think the code i wrote is not too bad already, below is a bit more readable and
+// modular
 
 const convertToRange = (section) => {
     const arr = section.split("-");
