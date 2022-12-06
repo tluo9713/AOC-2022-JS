@@ -6,15 +6,12 @@ const sampleInput = ``;
 let input = newLineSplitter(sampleInput);
 // input = newLineSplitter(rawInput);
 
-
 let part1 = (input) => {
     let res = 0;
     for (let i = 0; i < input.length - 1; i++) {
         let el = input[i];
     }
-    for (let i = 0; i < PLACEHOLDER; i++) {
-        
-    }
+    for (let i = 0; i < PLACEHOLDER; i++) {}
     return res;
 };
 
