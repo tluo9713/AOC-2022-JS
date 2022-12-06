@@ -69,3 +69,47 @@ console.log(part1CleanSolution);
 
 const part2CleanSolution = part2Clean(input);
 console.log(part2CleanSolution);
+
+// technically the code above is O(n) time and O(1) space complexity, but perhaps you would like
+// to optimize the code a bit more. we could use a sliding window
+const addToObj = (obj, char) => {
+    if (!obj[char]) {
+        obj[char] = 0;
+        obj.unique++;
+    }
+    obj[char]++;
+    obj.length++;
+};
+
+const removeFromObj = (obj, char) => {
+    obj[char]--;
+    if (!obj[char]) obj.unique--;
+    obj.length--;
+};
+
+// at this point, there is no need to do a part 2 version of this function, as all we have to
+// change is the numOfUniqueChars variable which is trivial, we can even pass that as an argument
+// so we can check any amount of chars.
+let part1Optimized = (input) => {
+    let res = 0;
+    let obj = { unique: 0, length: 0 };
+    const numOfUniqueChars = 4;
+    for (let i = 0; i < input.length - 1; i++) {
+        // get the char and add it to our sliding window obj
+        const char = input[i];
+        addToObj(obj, char);
+
+        // if adding the char pushes us past the length we need, we should remove char that
+        // falls outside the window
+        if (obj.length > numOfUniqueChars) {
+            // we need to remove the char that leaves the window
+            const removeChar = input[i - numOfUniqueChars];
+            removeFromObj(obj, removeChar);
+        }
+        if (obj.unique == numOfUniqueChars) return i + 1;
+    }
+    return res;
+};
+
+const part1OptimizedSolution = part1Optimized(input);
+console.log(part1OptimizedSolution);
