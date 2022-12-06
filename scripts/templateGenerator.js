@@ -36,11 +36,11 @@ let part1 = (input) => {
     return res;
 };
 
-let part1Solution = part1(input);
+const part1Solution = part1(input);
 console.log(part1Solution);
 `;
 
-const day = 5;
+const day = 6;
 
 try {
     // generate directory

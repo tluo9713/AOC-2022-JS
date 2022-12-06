@@ -45,7 +45,6 @@ Some of the pairs have noticed that one of their assignments fully contains the 
 
 In how many assignment pairs does one range fully contain the other?
 
-Your puzzle answer was 588.
 --- Part Two ---
 
 It seems like there is still quite a bit of duplicate work planned. Instead, the Elves would like to know the number of pairs that overlap at all.
@@ -60,13 +59,3 @@ In the above example, the first two pairs (2-4,6-8 and 2-3,4-5) don't overlap, w
 So, in this example, the number of overlapping assignment pairs is 4.
 
 In how many assignment pairs do the ranges overlap?
-
-Your puzzle answer was 911.
-
-Both parts of this puzzle are complete! They provide two gold stars: \*\*
-
-At this point, you should return to your Advent calendar and try another puzzle.
-
-If you still want to see it, you can get your puzzle input.
-
-You can also [Shareon Twitter Mastodon] this puzzle.
