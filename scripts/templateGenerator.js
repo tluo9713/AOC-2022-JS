@@ -40,7 +40,7 @@ const part1Solution = part1(input);
 console.log(part1Solution);
 `;
 
-const day = 7;
+const day = 8;
 
 try {
     // generate directory
