@@ -70,10 +70,10 @@ const someOverlap = (rangeA, rangeB) => {
 
     // if aStart is between bStart and bEnd, there are overlapping
     if (bStart <= aStart && aStart <= bEnd) return true;
-    // if aEnd is between bStart and bEnd, there are overlapping
-    if (bStart <= aEnd && aEnd <= bEnd) return true;
+    // if bStart is between aStart and aEnd, there are overlapping
     if (aStart <= bStart && bStart <= aEnd) return true;
-    if (aStart <= bEnd && bEnd <= aEnd) return true;
+    // if there is any overlap, the start of one interval has to be between the other intervals
+    // so we dont have any other checks to make
     return false;
 };
 
