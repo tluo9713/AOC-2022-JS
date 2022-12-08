@@ -159,7 +159,7 @@ const createDirectionalMasks = (input) => {
 };
 
 const checkTopToBottom = (input) => {
-    const monotonicStack = createMonotonicStack(ROW_LIMIT);
+    const monotonicStack = createMonotonicStack(COL_LIMIT);
     const mask = createMask(input);
 
     // to explain the logic, first know that the monotonic stack keeps track of the tallest
@@ -195,7 +195,7 @@ const checkTopToBottom = (input) => {
 };
 
 const checkBottomToTop = (input) => {
-    const monotonicStack = createMonotonicStack(ROW_LIMIT);
+    const monotonicStack = createMonotonicStack(COL_LIMIT);
     const mask = createMask(input);
 
     for (let row = ROW_LIMIT - 1; row >= 0; row--) {
@@ -218,7 +218,7 @@ const checkBottomToTop = (input) => {
 };
 
 const checkLeftToRight = (input) => {
-    const monotonicStack = createMonotonicStack(COL_LIMIT);
+    const monotonicStack = createMonotonicStack(ROW_LIMIT);
     const mask = createMask(input);
 
     for (let col = 0; col < COL_LIMIT; col++) {
@@ -241,7 +241,7 @@ const checkLeftToRight = (input) => {
 };
 
 const checkRightToLeft = (input) => {
-    const monotonicStack = createMonotonicStack(COL_LIMIT);
+    const monotonicStack = createMonotonicStack(ROW_LIMIT);
     const mask = createMask(input);
 
     for (let col = COL_LIMIT - 1; col >= 0; col--) {
@@ -336,3 +336,31 @@ const part2Optimized = (input) => {
 
 const part2OptimizedSolution = part2Optimized(input);
 console.log(part2OptimizedSolution);
+
+// const run1Times = (func, input) => {
+//     let total = 0;
+//     let t0 = performance.now();
+//     const solution = func(input);
+//     let t1 = performance.now();
+//     total += t1 - t0;
+//     console.log(total);
+// };
+
+// const run10Times = (func, input) => {
+//     let total = 0;
+//     for (let i = 0; i < 10; i++) {
+//         let t0 = performance.now();
+//         const solution = func(input);
+//         let t1 = performance.now();
+//         total += t1 - t0;
+//     }
+//     console.log(total / 10);
+// };
+
+// run1Times(part2, input);
+// run1Times(part2Optimized, input);
+
+// interesting to note, that on the first pass, the optimized smokes the unoptimized solution
+// but if we run the same code several more times, the unoptimized gets significantly faster
+// while the optimized only gets a little faster. im thinking theres some optimizations under
+// the hood thats been done thats makes it much better.
