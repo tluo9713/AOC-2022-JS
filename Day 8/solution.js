@@ -11,6 +11,12 @@ const sampleInput = `30373
 let input = newLineSplitter(sampleInput);
 input = newLineSplitter(rawInput);
 
+// my first thought in my attempt to do this is to literally search from each direction
+// left right up down and keep track of the max height tree. along the way if the current tree
+// is larger than anything we've seen before, we'll mark the current row and col as true and after
+// marking every possible tree from every direction, we'll count the amount of marked trees
+// below it can get confusing keeping track of things. imagine keeping things DRY?
+// i clearly just strong armed my way through as i couldnt think of a shorter way ... gross.
 let part1 = (input) => {
     let res = 0;
     let matrix = new Array(input.length - 1);
@@ -62,6 +68,8 @@ let part1 = (input) => {
 const part1Solution = part1(input);
 console.log(part1Solution);
 
+// plan for part 2 is to scrap everything we did in part 1, and just dfs looking for
+// the amount of trees you can see from every direction, and grab the max one
 const dfs = (matrix, row, col, dirRow, dirCol, val) => {
     let rowLimit = matrix.length - 1;
     let colLimit = matrix[0].length;
