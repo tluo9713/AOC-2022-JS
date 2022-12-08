@@ -1,4 +1,4 @@
-<a href="https://adventofcode.com/2022/day/6">Link to Prompt<a>
+<a href="https://adventofcode.com/2022/day/8">Link to Prompt<a>
 
 --- Day 8: Treetop Tree House ---
 

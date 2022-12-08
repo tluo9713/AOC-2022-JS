@@ -1,4 +1,4 @@
-<a href="https://adventofcode.com/2022/day/6">Link to Prompt<a>
+<a href="https://adventofcode.com/2022/day/7">Link to Prompt<a>
 
 --- Day 7: No Space Left On Device ---
 
