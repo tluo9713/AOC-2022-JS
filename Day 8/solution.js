@@ -1,15 +1,10 @@
 import rawInput from "./input.js";
 import { newLineSplitter } from "../Utils/utils.js";
 
-const sampleInput = `30373
-25512
-65332
-33549
-35390
-`;
+const sampleInput = ``;
 // process raw input
 let input = newLineSplitter(sampleInput);
-input = newLineSplitter(rawInput);
+// input = newLineSplitter(rawInput);
 
 // my first thought in my attempt to do this is to literally search from each direction
 // left right up down and keep track of the max height tree. along the way if the current tree
@@ -345,10 +340,15 @@ console.log(part2OptimizedSolution);
 //     total += t1 - t0;
 //     console.log(total);
 // };
+// input = input.map((el) => el.split(""));
 
 // const run10Times = (func, input) => {
 //     let total = 0;
 //     for (let i = 0; i < 10; i++) {
+//         // let randomRow = Math.floor(Math.random() * ROW_LIMIT);
+//         // let randomCol = Math.floor(Math.random() * COL_LIMIT);
+//         // let randInt = Math.floor(Math.random() * 9);
+//         // input[randomRow][randomCol] = randInt;
 //         let t0 = performance.now();
 //         const solution = func(input);
 //         let t1 = performance.now();
@@ -357,8 +357,8 @@ console.log(part2OptimizedSolution);
 //     console.log(total / 10);
 // };
 
-// run1Times(part2, input);
-// run1Times(part2Optimized, input);
+// run10Times(part2, input);
+// run10Times(part2Optimized, input);
 
 // interesting to note, that on the first pass, the optimized smokes the unoptimized solution
 // but if we run the same code several more times, the unoptimized gets significantly faster
