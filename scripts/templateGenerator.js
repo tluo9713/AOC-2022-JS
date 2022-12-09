@@ -38,9 +38,12 @@ let part1 = (input) => {
 
 const part1Solution = part1(input);
 console.log(part1Solution);
+
+// const part2Solution = part2(input);
+// console.log(part2Solution);
 `;
 
-const day = 8;
+const day = 9;
 
 try {
     // generate directory
