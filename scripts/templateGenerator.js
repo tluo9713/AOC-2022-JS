@@ -43,7 +43,7 @@ console.log(part1Solution);
 // console.log(part2Solution);
 `;
 
-const day = 9;
+const day = 10;
 
 try {
     // generate directory
