@@ -245,7 +245,7 @@ const processInstructions = (input, callback) => {
             cycle++;
             cyclesToComplete--;
         }
-        if (instruction == "addx") x += +val;
+        if (instruction == "addx") x += Number(val);
     }
 };
 
