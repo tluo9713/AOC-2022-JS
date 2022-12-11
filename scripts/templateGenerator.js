@@ -42,8 +42,9 @@ console.log(part1Solution);
 // const part2Solution = part2(input);
 // console.log(part2Solution);
 `;
+const day = 11;
 
-const day = 10;
+const promptData = `<a href="https://adventofcode.com/2022/day/${day}">Link to Prompt<a>`;
 
 try {
     // generate directory
@@ -62,6 +63,13 @@ try {
     await fs.writeFile(
         solutionFileName,
         solutionData,
+        (err) => err && console.error(err)
+    );
+    const promptFileName = `${__dirname}/Day ${day}/prompt.md`;
+
+    await fs.writeFile(
+        promptFileName,
+        promptData,
         (err) => err && console.error(err)
     );
 } catch (error) {
