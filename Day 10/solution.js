@@ -235,7 +235,7 @@ for (let i = 0; i < part2Solution.length; i++) console.log(part2Solution[i]);
 
 const processInstructions = (input, callback) => {
     let x = 1;
-    let dict = { noop: 1, addx: 2 };
+    const dict = { noop: 1, addx: 2 };
     for (let inputIdx = 0, cycle = 1; cycle <= 240; inputIdx++) {
         const [instruction, val] = input[inputIdx].split(" ");
         let cyclesToComplete = dict[instruction];
@@ -245,11 +245,11 @@ const processInstructions = (input, callback) => {
             cycle++;
             cyclesToComplete--;
         }
-        if (instruction == "addx") x += +val;
+        if (instruction == "addx") x += Number(val);
     }
 };
 
-let part1Refactor = (input) => {
+const part1Refactor = (input) => {
     let res = 0;
     const importantCycles = new Set([20, 60, 100, 140, 180, 220]);
     // to make this not reliant on a set, we could use (cycle + 20 % 40 == 0) but i find
@@ -267,7 +267,7 @@ let part1Refactor = (input) => {
 const part1RefactorSolution = part1Refactor(input);
 console.log(part1RefactorSolution);
 
-let part2Refactor = (input) => {
+const part2Refactor = (input) => {
     let res = [];
     let curr = "";
     const sizeOfSprite = 3;

@@ -181,12 +181,6 @@ let part2 = () => {
 const part2Solution = part2();
 console.log(part2Solution);
 
-// process raw input
-// input = newLineSplitter(rawInput);
-
-// let input = sampleInput.split("Monkey");
-// for (let i = 0; i < input.length; i++) console.log(i, input[i]);
-
 // i kind of took my time with part 1 so its fairly straightforward and i have no problem with
 // it in general.
 // below i wrote out a process input function that is extensible. if there are new operations
