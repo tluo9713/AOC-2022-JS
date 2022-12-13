@@ -111,3 +111,70 @@ console.log(part2Solution);
 
 // we can use part 2 helper as the main reused function and part1 and part 2 will use it
 // accordingly
+
+const orderEvaluator = (arrA, arrB) => {
+    // returns positive if its in the wrong order, negative if it's in the right order,
+    // 0 if both are the same.
+    const maxLen = Math.max(arrA.length, arrB.length);
+    for (let i = 0; i < maxLen; i++) {
+        let a = arrA[i];
+        let b = arrB[i];
+        // a is defined and b is undefined, which means order is wrong
+        if (a != undefined && b == undefined) return 1;
+        // vice versa, but order is correct
+        if (a == undefined && b != undefined) return -1;
+        // if both are numbers we just subtract
+        if (typeof a == "number" && typeof b == "number") {
+            if (a == b) continue;
+            return a - b;
+        }
+        // if we reach this point, one of a or b is not an arr, so lets convert the int to
+        // and arr
+        if (typeof a == "number") a = [a];
+        if (typeof b == "number") b = [b];
+        // recursively call on function
+        let res = orderEvaluator(a, b);
+        // 0 means both evaluate to be the same so we check next
+        if (res == 0) continue;
+        // otherwise we return that value
+        return res;
+    }
+    return 0;
+};
+
+const part1Refactor = (input) => {
+    let res = 0;
+    let idx = 1;
+    for (let i = 0; i < input.length - 1; i += 3) {
+        let first = eval(input[i]);
+        let second = eval(input[i + 1]);
+        if (orderEvaluator(first, second) < 0) res += idx;
+        idx++;
+    }
+    return res;
+};
+
+const part1RefactorSolution = part1Refactor(input);
+console.log(part1RefactorSolution);
+
+const part2Refactor = (input, packetA = [[2]], packetB = [[6]]) => {
+    const arr = [];
+
+    for (let i = 0; i < input.length - 1; i++) {
+        let line = input[i];
+        if (line != "") arr.push(eval(line));
+    }
+    arr.push(packetA, packetB);
+    arr.sort(orderEvaluator);
+    let aIdx;
+    let bIdx;
+    for (let i = 0; i < arr.length; i++) {
+        const str = JSON.stringify(arr[i]);
+        if (str == JSON.stringify(packetA)) aIdx = i + 1;
+        if (str == JSON.stringify(packetB)) bIdx = i + 1;
+    }
+    return aIdx * bIdx;
+};
+
+const part2RefactorSolution = part2Refactor(input);
+console.log(part2RefactorSolution);
