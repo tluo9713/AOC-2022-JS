@@ -16,6 +16,11 @@ Valve JJ has flow rate=21; tunnel leads to valve II
 let input = newLineSplitter(sampleInput);
 input = newLineSplitter(rawInput);
 
+// BEHOLD, MY GREAT MONSTROUSITY. again, this is my initial approach and should not
+// really be looked at because its awful, logic is hard to parse, code is WET af
+// and part 2 is not optimal and perhaps even luck that i happen to complete it.
+// will eventually work on a more optimal and readable solution
+
 const processInput = (input) => {
     let graph = {};
     let flow = {};
@@ -79,6 +84,15 @@ const bfs = (graph, startValve) => {
 };
 
 let part1 = (input) => {
+    // major idea is to make a graph of all valves and distance to travel there as
+    // well as flow of each valve. we're basically trying every combination out
+    // and thats slow but what we can do is reduce the complexity of the graph
+    // because some valves have a rate of 0, in otherwords they're only nodes to
+    // connect to other graphs, in which case why dont we have every non 0 rate
+    // valve connect to each other, and record how long it takes to traverse to
+    // each other, then have another function that will always go from one valve
+    // to another and always open the valve its at. believe it or not, this is
+    // pretty fast
     let alpha = "AA";
     let [graph, flow, seen, maxFlow] = processInput(input);
 
@@ -105,14 +119,10 @@ let part1 = (input) => {
         bfs(graph, valve);
     }
     let max = 0;
-    for (let key in graph) {
-        console.log(key, graph[key]);
-    }
     let dfs = (start, minute = 0, rate = 0, total = 0, openV = new Set()) => {
         if (rate == maxFlow) {
             total += (30 - minute) * rate;
             max = Math.max(total, max);
-            // console.log("max flow reached");
             return;
         }
         if (openV.has(start)) return;
@@ -121,7 +131,6 @@ let part1 = (input) => {
         max = Math.max(total, max);
         rate += flow[start];
         if (minute == 30) {
-            // console.log("30 mins reachd");
             return;
         }
 
@@ -135,7 +144,6 @@ let part1 = (input) => {
                 currTotal += rate;
                 localMinute++;
                 if (localMinute == 30) {
-                    // console.log("max 30 mins reached");
                     if (currTotal > max) {
                         max = currTotal;
                     }
@@ -153,90 +161,13 @@ let part1 = (input) => {
     }
     return max;
 };
-// const part1Solution = part1(input);
-// console.log(part1Solution);
+const part1Solution = part1(input);
+console.log(part1Solution);
 
-// let bfs2 = (start) => {
-// kind of works for both parts, except for that off by 1 error
-//     // nextvalve, traveltimeleft, time, rate, total, seen
-//     // const queue = [];
-//     let queue = new Node(null, null, null, null, null, null);
-//     let tail = queue;
-//     for (let valve in graph[start]) {
-//         tail.next = new Node(
-//             valve,
-//             graph[start][valve] + 1, //for actual data, otherwise dont add 1?
-//             0,
-//             0,
-//             0,
-//             new Set([valve])
-//         );
-//         tail = tail.next;
-//         // queue.push([
-//         //     valve,
-//         //     graph[start][valve] + 1,
-//         //     0,
-//         //     0,
-//         //     0,
-//         //     new Set([valve]),
-//         // ]);
-//     }
-//     queue = queue.next;
-//     // let i = 0;
-//     // using shift will time out, using index doesnt work either cause its too large
-//     // for our array so we'll use a linked list
-//     while (queue) {
-//         let { valve, timeToStart, time, rate, total, seen, next } = queue;
-//         queue = next;
-
-//         if (time == 30) {
-//             // console.log("bro hello?");
-//             max = Math.max(max, total);
-//             continue;
-//         }
-//         total += rate;
-//         if (timeToStart != 0) {
-//             tail.next = new Node(
-//                 valve,
-//                 timeToStart - 1,
-//                 time + 1,
-//                 rate,
-//                 total,
-//                 new Set(seen)
-//             );
-//             tail = tail.next;
-//             continue;
-//         }
-//         // problem we never reach max flow
-//         rate += flow[valve];
-//         if (rate == maxFlow) {
-//             console.log("bit what?");
-//             total += rate * (30 - time);
-//             max = Math.max(total, max);
-//             continue;
-//         }
-//         // add other paths
-//         for (let nextValve in graph[valve]) {
-//             if (seen.has(nextValve)) continue;
-//             let timeToStart = graph[valve][nextValve];
-//             let nextSet = new Set(seen);
-//             nextSet.add(nextValve);
-//             tail.next = new Node(
-//                 nextValve,
-//                 timeToStart,
-//                 time + 1,
-//                 rate,
-//                 total,
-//                 nextSet
-//             );
-//             tail = tail.next;
-//         }
-//     }
-// };
 // lol below works but not in a great way. i just console log the max
 // as it updates and check every combination, but this ends up taking
 // way longer, like i got the solution and code is still running
-// for 30 minutes longer. i suppose i got lucky this time that i happen
+// for 45 minutes longer. i suppose i got lucky this time that i happen
 // get the right solution early?
 let part2 = (input) => {
     let alpha = "AA";
@@ -264,13 +195,16 @@ let part2 = (input) => {
     for (let valve of seen) {
         bfs(graph, valve);
     }
-    for (let key in graph) {
-        console.log(key, graph[key]);
-    }
     let max = 0;
     let minMinute = Infinity;
-    // valveA, travelTime, valueB, eTravelTime, time, 0, 0, new Set();
-    // use dfs and keep track of state there
+    // i tried to use bfs, so each element in the queue will handle state
+    // but using shift is too slow when you run into too many possibilities
+    // using index, the length is too long for an array, so i even used a
+    // linked list and that was too slow in the end and didnt work
+    // use dfs and keep track of state there, we'll basically try out
+    // every combination possible, and use a set that will keep track
+    // of every valve we're going to. theres actually an edge case that i
+    // would fail sooo... just be lucky i guess
     let dfs2 = (
         valveA,
         travelTime,
@@ -281,31 +215,17 @@ let part2 = (input) => {
         total = 0,
         openV = new Set()
     ) => {
-        // console.log(
-        //     valveA,
-        //     travelTime,
-        //     valveB,
-        //     eTravelTime,
-        //     minute,
-        //     rate,
-        //     total,
-        //     JSON.stringify([...openV])
-        // );
         if (rate == maxFlow) {
             total += (26 - minute) * rate;
-            if (max < total)
-                console.log("fucking hell", total, JSON.stringify([...openV]));
             max = Math.max(total, max);
             minMinute = Math.min(minMinute, minute);
             return;
         }
         if (minute == 26) {
-            if (max < total) console.log("fucking hell", total);
             max = Math.max(total, max);
             return;
         }
         total += rate;
-        // max = Math.max(total, max);
         // update varaibles here?? gonna be really long, fuck
         // if travelTime != 0 && eTravelTime != 0 just count down on both
         minute++;
@@ -400,7 +320,6 @@ let part2 = (input) => {
         // if travelTime == 0 && eTravelTime == 0 increate rate by both and nested
         // i guess this will be the only case left
         rate += flow[valveA] + flow[valveB];
-        // console.log(rate, valveA, flow[valveA], valveB, flow[valveB]);
         let count2 = 0;
         for (let nextValveA in graph[valveA]) {
             if (openV.has(nextValveA)) continue;
@@ -445,20 +364,6 @@ let part2 = (input) => {
         }
     };
 
-    // function Node(valve, timeToStart, eValve, eTime, time, rate, total, seen) {
-    //     // console.log("node", valve, travelTime, time, rate, total, seen);
-    //     this.valve = valve;
-    //     this.timeToStart = timeToStart;
-    //     this.eValve = eValve;
-    //     this.eTime = eTime;
-    //     this.time = time;
-    //     this.rate = rate;
-    //     this.total = total;
-    //     this.seen = seen;
-    //     this.next = null;
-    // }
-    // console.log(maxFlow);
-
     for (let valveA in graph[alpha]) {
         let travelTime = graph[alpha][valveA];
         for (let valveB in graph[alpha]) {
@@ -476,7 +381,6 @@ let part2 = (input) => {
             );
         }
     }
-    // dfs(alpha);
     return max;
 };
 const part2Solution = part2(input);
