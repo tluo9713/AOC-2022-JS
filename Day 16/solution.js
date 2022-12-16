@@ -385,3 +385,5 @@ let part2 = (input) => {
 };
 const part2Solution = part2(input);
 console.log(part2Solution);
+
+// to do : a cleaner, faster refactored solution
