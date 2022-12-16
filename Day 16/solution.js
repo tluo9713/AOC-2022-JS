@@ -233,7 +233,11 @@ let part1 = (input) => {
 //         }
 //     }
 // };
-
+// lol below works but not in a great way. i just console log the max
+// as it updates and check every combination, but this ends up taking
+// way longer, like i got the solution and code is still running
+// for 30 minutes longer. i suppose i got lucky this time that i happen
+// get the right solution early?
 let part2 = (input) => {
     let alpha = "AA";
     let [graph, flow, seen, maxFlow] = processInput(input);
