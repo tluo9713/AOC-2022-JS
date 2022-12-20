@@ -90,3 +90,65 @@ let part2 = (input) => {
 };
 const part2Solution = part2(input);
 console.log(part2Solution);
+
+// above is an n^2 solution cause you have to go through every element and for each
+// use indexof which is an n time complexity action, as well as splice.
+// below is refactored but not much changes
+
+const parseInput = (input, key = 1) => {
+    const arr = [];
+    let zeroIdentifier;
+    for (let i = 0; i < input.length - 1; i++) {
+        const el = input[i];
+        const val = Number(el) * key;
+        const str = `${val}+${i}`;
+        if (el == 0) zeroIdentifier = str;
+        arr.push(str);
+    }
+    return [arr, zeroIdentifier];
+};
+
+const mixCoordinates = (originalOrder, arr) => {
+    for (let el of originalOrder) {
+        let idx = arr.indexOf(el);
+        let [num, _] = el.split("+");
+        let indexAfterMoving = (idx + Number(num)) % (arr.length - 1);
+        arr.splice(idx, 1);
+        arr.splice(indexAfterMoving, 0, el);
+    }
+};
+
+const sumOfCoordinates = (arr, zeroIdentifier) => {
+    const zeroIdx = arr.indexOf(zeroIdentifier);
+    let res = 0;
+    for (let i = 1; i <= 3; i++) {
+        let idx = zeroIdx + i * 1000;
+        let [val, _] = arr[idx % arr.length].split("+");
+        res += Number(val);
+    }
+    return res;
+};
+
+let part1Refactor = (input) => {
+    const [arr, zeroIdentifier] = parseInput(input);
+    const originalOrder = [...arr];
+    mixCoordinates(originalOrder, arr);
+
+    return sumOfCoordinates(arr, zeroIdentifier);
+};
+
+const part1RefactorSolution = part1Refactor(input);
+console.log(part1RefactorSolution);
+
+let part2Refactor = (input) => {
+    const KEY = 811589153;
+    const [arr, zeroIdentifier] = parseInput(input, KEY);
+    const originalOrder = [...arr];
+
+    for (let i = 0; i < 10; i++) mixCoordinates(originalOrder, arr);
+
+    return sumOfCoordinates(arr, zeroIdentifier);
+};
+
+const part2RefactorSolution = part2Refactor(input);
+console.log(part2RefactorSolution);
