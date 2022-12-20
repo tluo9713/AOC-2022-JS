@@ -42,7 +42,7 @@ console.log(part1Solution);
 // const part2Solution = part2(input);
 // console.log(part2Solution);
 `;
-const day = 17;
+const day = 20;
 
 const promptData = `<a href="https://adventofcode.com/2022/day/${day}">Link to Prompt<a>`;
 
