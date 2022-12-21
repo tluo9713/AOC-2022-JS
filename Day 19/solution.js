@@ -8,6 +8,9 @@ Blueprint 2: Each ore robot costs 2 ore. Each clay robot costs 3 ore. Each obsid
 let input = newLineSplitter(sampleInput);
 input = newLineSplitter(rawInput);
 
+// LOL cause stan wants me to push up code, here is my UNFINISHED
+// UGLY code for day 19 i will finish it someday soon
+// https://www.meme-arsenal.com/memes/c1bff6388d27d89cebe121b22061d1b1.jpg
 let test = {
     10: [
         [1, 3, 0, 0],
