@@ -19,49 +19,47 @@ const sampleInput = `2,2,2
 let input = newLineSplitter(sampleInput);
 input = newLineSplitter(rawInput);
 
-// let part1 = (input) => {
-//     let res = 0;
-//     let xPoints = new Set();
-//     let yPoints = new Set();
-//     let zPoints = new Set();
-//     for (let i = 0; i < input.length - 1; i++) {
-//         let [x, y, z] = input[i].split(",");
-//         res += 6;
-//         for (let i = 0; i <= 1; i++) {
-//             let str = [+x + i, y, z].join(",");
-//             console.log(str);
-//             if (xPoints.has(str)) {
-//                 console.log(input[i], "has ", str);
-//                 res -= 2;
-//             }
-//             xPoints.add(str);
-//         }
-//         for (let i = 0; i <= 1; i++) {
-//             let str = [x, +y + i, z].join(",");
-//             console.log(str);
-//             if (yPoints.has(str)) {
-//                 console.log(input[i], "has ", str);
-//                 res -= 2;
-//             }
-//             yPoints.add(str);
-//         }
-//         for (let i = 0; i <= 1; i++) {
-//             let str = [x, y, +z + i].join(",");
-//             console.log(str);
-//             if (zPoints.has(str)) {
-//                 console.log(input[i], "has ", str);
+let part1 = (input) => {
+    let res = 0;
+    let xPoints = new Set();
+    let yPoints = new Set();
+    let zPoints = new Set();
+    for (let i = 0; i < input.length - 1; i++) {
+        let [x, y, z] = input[i].split(",");
+        res += 6;
+        for (let i = 0; i <= 1; i++) {
+            let str = [+x + i, y, z].join(",");
+            console.log(str);
+            if (xPoints.has(str)) {
+                res -= 2;
+            }
+            xPoints.add(str);
+        }
+        for (let i = 0; i <= 1; i++) {
+            let str = [x, +y + i, z].join(",");
+            console.log(str);
+            if (yPoints.has(str)) {
+                res -= 2;
+            }
+            yPoints.add(str);
+        }
+        for (let i = 0; i <= 1; i++) {
+            let str = [x, y, +z + i].join(",");
+            console.log(str);
+            if (zPoints.has(str)) {
+                res -= 2;
+            }
+            zPoints.add(str);
+        }
+    }
+    return res;
+};
 
-//                 res -= 2;
-//             }
-//             zPoints.add(str);
-//         }
-//     }
-//     return res;
-// };
+const part1Solution = part1(input);
+console.log(part1Solution);
 
-// const part1Solution = part1(input);
-// console.log(part1Solution);
-
+// lol below is a monstrousity, as a person who hates nesting
+// what have i become????
 let part2 = (input) => {
     let res = 0;
     let xPoints = {};
@@ -81,7 +79,6 @@ let part2 = (input) => {
         yMax = Math.max(yMax, y);
         zMin = Math.min(zMin, z);
         zMax = Math.max(zMax, z);
-        // console.log("input", input[i], x, y, z);
         res += 6;
         for (let j = 0; j <= 1; j++) {
             let str = [+x + j, y, z].join(",");
@@ -95,18 +92,10 @@ let part2 = (input) => {
             if (!yPoints[str]) yPoints[str] = 0;
             yPoints[str]++;
         }
-        // console.log("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
         for (let j = 0; j <= 1; j++) {
             let str = [x, y, +z + j].join(",");
-            // if (input[i] == "2,2,6") {
-            //     console.log("LOOKIE", str);
-            // }
-            // console.log("hi", input[i], "vars", x, y, z, "str", str);
             if (zPoints[str]) res -= 2;
             if (!zPoints[str]) zPoints[str] = 0;
-            // if (str == "2,2,4") {
-            //     console.log(" wtf", input[i], x, y, z);
-            // }
             zPoints[str]++;
         }
     }
@@ -130,11 +119,9 @@ let part2 = (input) => {
         set.add(curr);
 
         if (+x > xMax + 1 || +y > yMax + 1 || +z > zMax + 1) {
-            // console.log("beyond max");
             return true;
         }
         if (+x < xMin || +y < yMin || +z < zMin) {
-            // console.log("beyond min");
             return true;
         }
 
@@ -201,7 +188,6 @@ let part2 = (input) => {
 
         return false;
     };
-    // console.log(zPoints);
     for (let i = 0; i < input.length - 1; i++) {
         let [x, y, z] = input[i].split(",");
         let x0 = [x, y, z].join(",");
